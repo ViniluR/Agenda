@@ -66,6 +66,9 @@ class View:
   def agenda_listar():
     return NAgenda.listar()
 
+  def agenda_listar_id(id):
+    return NAgenda.listar_id()
+
   def agenda_listarhoje():
     r = []
     hoje = datetime.datetime.today()
@@ -73,6 +76,18 @@ class View:
       if horario.get_confirmado() == False and horario.get_data().date() == hoje.date():
         r.append(horario)
     return r    
+
+  def agenda_cliente(cliente, horario, servico):
+    NAgenda.atualizar(Agenda(horario.get_id(), horario.get_data, False, cliente, servico.get_id()))
+
+  def agenda_listarsemana():
+    r = []
+    hoje = datetime.datetime.today()
+    fds = hoje + datetime.timedelta(days = 7)
+    for horario in View.agenda_listar():
+      if horario.get_confirmado() == False and fds.date() >= horario.get_data().date() >= hoje.date():
+        r.append(horario)
+    return r   
 
   def agenda_listarcliente(cliente):
     r = []

@@ -10,6 +10,8 @@ class AgendaClienteUI:
   def listar():
     cliente = View.cliente_listar_id(st.session_state["cliente_id"])
     agendas = View.agenda_listarcliente(cliente)
+    # inicio = st.text_input("Informe a data inicial no formato DD/MM/AAAA")
+    # final = st.text_input("Informe a data final no formato DD/MM/AAAA")
     if len(agendas) == 0:
       st.write("Você não possui nenhum agendamento")
     else:
