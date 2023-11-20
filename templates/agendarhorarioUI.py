@@ -14,7 +14,8 @@ class AgendarHorarioUI:
     else:  
       dic = []
       for obj in horarios:
-        dic.append(obj.__dict__)
+        if not obj.get_id_cliente():
+          dic.append(obj.__dict__)
       df = pd.DataFrame(dic)
       st.dataframe(df)
       horario = st.selectbox("Escolha o horário", horarios)
@@ -22,6 +23,6 @@ class AgendarHorarioUI:
       if st.button("Agendar"):
           id = st.session_state["cliente_id"]
           View.agenda_cliente(id, horario, servico)
-          st.succes("Horário agendado com sucesso")
+          st.success("Horário agendado com sucesso")
 
 

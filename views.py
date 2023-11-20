@@ -78,7 +78,7 @@ class View:
     return r    
 
   def agenda_cliente(cliente, horario, servico):
-    NAgenda.atualizar(Agenda(horario.get_id(), horario.get_data, False, cliente, servico.get_id()))
+    NAgenda.atualizar(Agenda(horario.get_id(), horario.get_data(), False, cliente, servico.get_id()))
 
   def agenda_listarsemana():
     r = []
@@ -113,3 +113,14 @@ class View:
     while aux <= data_fim :
       NAgenda.inserir(Agenda(0, aux, False, 0, 0))
       aux = aux + delta
+
+  def agenda_periodo(obj, inicio, final):
+    data_inicio = datetime.datetime.strptime(inicio, "%d/%m/%Y")
+    data_fim = datetime.datetime.strptime(final, "%d/%m/%Y")
+    if data_inicio <= obj.get_data() <= data_fim: return True
+
+  def agenda_solicitados():
+    r = []
+    for obj in NAgenda.listar_nao_confirmados():
+      if obj.get_id_cliente(): r.append(obj)
+    return r

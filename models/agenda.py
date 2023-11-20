@@ -62,9 +62,9 @@ class NAgenda:
     nao_confirmados = []
     aux = datetime.datetime.now()
     hoje = datetime.datetime(aux.year, aux.month, aux.day)
-    for aux in cls.__agendas:
-      if not aux.__confirmado and aux.__data > hoje:
-        nao_confirmados.append(aux)
+    for obj in cls.__agendas:
+      if not obj.get_confirmado() and obj.get_data() > hoje:
+        nao_confirmados.append(obj)
     return nao_confirmados
 
   @classmethod
