@@ -115,8 +115,8 @@ class View:
       aux = aux + delta
 
   def agenda_periodo(obj, inicio, final):
-    data_inicio = datetime.datetime.strptime(inicio, "%d/%m/%Y")
-    data_fim = datetime.datetime.strptime(final, "%d/%m/%Y")
+    data_inicio = datetime.datetime.strptime(f"{inicio} 00:00", "%d/%m/%Y %H:%M")
+    data_fim = datetime.datetime.strptime(f"{final} 23:59", "%d/%m/%Y %H:%M")
     if data_inicio <= obj.get_data() <= data_fim: return True
 
   def agenda_solicitados():
